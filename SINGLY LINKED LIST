@@ -1,0 +1,138 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<malloc.h>
+struct node
+{
+    int data;
+    struct node * next;
+};
+struct node *head = NULL;
+void beg_insert(struct node *new1);
+void beg_delete();
+void traverse();
+void end_insert(struct node *new1);
+void end_delete();
+int main()
+{
+    int choice;
+    struct node * ptr;
+    while(1)
+    {
+        printf("\nMenu -\n1 for inserting element in begining\n2 for deleting element from begining\n3 for traversing elements\n4 for inserting element in end\n5 for deleting element from end\n");
+        printf("Enter the choice : ");
+        scanf("%d", &choice);
+        switch(choice)
+        {
+            case 1:
+            ptr = (struct node *)malloc(sizeof(struct node));
+            printf("Enter the element : ");
+            scanf("%d", &ptr->data);
+            ptr -> next = NULL;
+            beg_insert(ptr);
+            break;
+
+            case 2:
+            beg_delete();
+            break;
+
+            case 3:
+            traverse();
+            break;
+
+            case 4:
+            ptr = (struct node *)malloc(sizeof(struct node));
+            printf("Enter the element : ");
+            scanf("%d", &ptr->data);
+            ptr -> next = NULL;
+            end_insert(ptr);
+            break;
+
+            case 5:
+            end_delete();
+
+            default:
+            exit(1);
+        }
+    }
+}
+
+void beg_insert(struct node *new1)
+{
+    if(head == NULL)
+    {
+        head = new1;
+    }
+    else
+    {
+        new1 -> next = head;
+        head = new1;
+    }
+}
+
+void beg_delete()
+{
+    struct node *t = head;
+    if(head == NULL)
+    {
+        printf("Empty");
+    }
+    else
+    {
+        head = head -> next;
+        free(t);
+        t = NULL;
+    }
+}
+
+void traverse()
+{
+    struct node*t1 = head;
+    if(head == NULL)
+    {
+        printf("List is Empty");
+    }
+    else
+    {
+        while(t1 != NULL)
+        {
+            printf("%d\t", t1 -> data);
+            t1 = t1 -> next;
+        }
+    }
+}
+
+void end_insert(struct node *new1)
+{
+    struct node *temp = head;
+    if(head == NULL)
+    {
+        head = new1;
+    }
+    else
+    {
+        while(temp -> next != NULL)
+        {
+            temp = temp -> next;
+        }
+        temp -> next = new1;
+    }
+}
+
+void end_delete()
+{
+    if(head==NULL)
+    {
+        printf("Underflow");
+    }
+    else
+    {
+        struct node *temp = head, *temp1;
+        while(temp -> next -> next != NULL)
+        {
+            temp = temp -> next;
+        }
+        temp1 = temp -> next;
+        free(temp1);
+        temp1 = NULL;
+    }
+}
