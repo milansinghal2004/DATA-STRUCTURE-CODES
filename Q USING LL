@@ -8,7 +8,7 @@ struct node
     int data;
     struct node *next;
 };
-struct node *rear = NULL, *front=NULL;
+struct node *rear = NULL, *front=NULL; 
 
 void enq(struct node *new1);
 void deq();
